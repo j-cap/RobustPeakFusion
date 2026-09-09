@@ -17,6 +17,8 @@ Two approaches are implemented and compared:
 The complete comparison—including the digitized measurements, missing-sensor
 cases, synthetic examples, and a Monte Carlo benchmark—is in
 [`notebooks/01_compare_peak_detectors.ipynb`](notebooks/01_compare_peak_detectors.ipynb).
+Language-independent pseudocode for the recommended method is available in
+[`docs/duration_aware_pseudocode.md`](docs/duration_aware_pseudocode.md).
 
 ## Repository layout
 
