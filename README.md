@@ -47,8 +47,9 @@ pytest
 jupyter lab notebooks/01_compare_peak_detectors.ipynb
 ```
 
-The notebook is committed with its outputs, so it can also be read directly on
-GitHub without running it.
+The notebook's complete narrative and code can be read directly on GitHub. Run
+it locally to regenerate the result tables and figures; outputs are intentionally
+not embedded to keep GitHub's notebook preview reliable.
 
 ## Data limitation
 
