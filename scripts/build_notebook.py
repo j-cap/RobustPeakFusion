@@ -59,7 +59,7 @@ data["AP_01"].head()"""))
 
 cells.append(nbf.v4.new_markdown_cell(r"""## 1. Digitized measurements
 
-The traces were recovered by HSV color segmentation followed by the median colored-pixel position in each image column. Because the figures contain no numerical axis labels, both axes are normalized. These data preserve shape and relative timing, but not physical units. The source images and reproducible extraction script are included in the repository."""))
+The traces were recovered by HSV color segmentation followed by the median colored-pixel position in each image column. Because the figures contain no numerical axis labels, both axes are normalized. These data preserve shape and relative timing, but not physical units. The reproducible extraction script is included; the original screenshots are intentionally not published."""))
 
 cells.append(nbf.v4.new_code_cell(r"""fig, axes = plt.subplots(2, 1, figsize=(12, 6), sharex=True)
 for ax, (name, frame) in zip(axes, data.items()):
@@ -74,7 +74,7 @@ cells.append(nbf.v4.new_markdown_cell(r"""## 2. The two estimators
 
 ### GMM baseline
 
-After median filtering and baseline subtraction, normalized positive amplitude is treated as probability mass over time. Weighted pseudo-samples are drawn, BIC chooses (K\in\{1,\ldots,5\}), and the mean of the component with greatest mixture weight is selected. This is a direct implementation of the proposed “detect components and select the dominant one” idea.
+After median filtering and baseline subtraction, normalized positive amplitude is treated as probability mass over time. Weighted pseudo-samples are drawn, BIC chooses $K\in\{1,\ldots,5\}$, and the mean of the component with greatest mixture weight is selected. This is a direct implementation of the proposed “detect components and select the dominant one” idea.
 
 ### Duration-aware candidate
 
