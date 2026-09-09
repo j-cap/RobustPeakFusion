@@ -24,6 +24,7 @@ cases, synthetic examples, and a Monte Carlo benchmark—is in
 data/
   AP_01.csv, AP_02.csv       # Approximate digitized traces
   raw_images/                # Optional local screenshots (gitignored)
+figures/                     # Generated plots shown in GitHub's preview
 notebooks/
   01_compare_peak_detectors.ipynb
 scripts/
@@ -47,9 +48,10 @@ pytest
 jupyter lab notebooks/01_compare_peak_detectors.ipynb
 ```
 
-The notebook's complete narrative and code can be read directly on GitHub. Run
-it locally to regenerate the result tables and figures; outputs are intentionally
-not embedded to keep GitHub's notebook preview reliable.
+The notebook's complete narrative, code, and generated figures can be read
+directly on GitHub. Figures are stored as ordinary PNG files and referenced by
+the notebook; large base64 outputs are intentionally not embedded so GitHub's
+preview remains reliable.
 
 ## Data limitation
 

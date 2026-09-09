@@ -55,6 +55,8 @@ data = {
     name: pd.read_csv(ROOT / "data" / f"{name}.csv")
     for name in ("AP_01", "AP_02")
 }
+FIGURES = ROOT / "figures"
+FIGURES.mkdir(exist_ok=True)
 data["AP_01"].head()"""))
 
 cells.append(nbf.v4.new_markdown_cell(r"""## 1. Digitized measurements
@@ -68,7 +70,11 @@ for ax, (name, frame) in zip(axes, data.items()):
     ax.set(title=f"{name}: digitized traces", ylabel="Image-derived amplitude")
     ax.legend(loc="best")
 axes[-1].set_xlabel("Normalized time")
-fig.tight_layout()"""))
+fig.tight_layout()
+fig.savefig(FIGURES / "01_digitized_measurements.png", dpi=160, bbox_inches="tight")
+plt.close(fig)"""))
+
+cells.append(nbf.v4.new_markdown_cell(r"""![Digitized blue and orange sensor measurements](../figures/01_digitized_measurements.png)"""))
 
 cells.append(nbf.v4.new_markdown_cell(r"""## 2. The two estimators
 
@@ -101,7 +107,7 @@ cells.append(nbf.v4.new_code_cell(r"""def estimate_measurement(frame, detector, 
     return estimates, fused
 
 
-def plot_comparison(name, frame):
+def plot_comparison(name, frame, filename):
     fig, axes = plt.subplots(2, 2, figsize=(14, 7), sharex=True)
     methods = [("GMM", gmm_detector), ("Duration-aware", duration_detector)]
     t = frame.time_normalized.to_numpy()
@@ -126,10 +132,20 @@ def plot_comparison(name, frame):
         top.legend(fontsize=8, ncol=2)
         bottom.legend(fontsize=8)
     fig.tight_layout()
+    fig.savefig(FIGURES / filename, dpi=160, bbox_inches="tight")
+    plt.close(fig)
 
 
-for name, frame in data.items():
-    plot_comparison(name, frame)"""))
+plot_comparison("AP_01", data["AP_01"], "02_ap_01_detector_comparison.png")
+plot_comparison("AP_02", data["AP_02"], "03_ap_02_detector_comparison.png")"""))
+
+cells.append(nbf.v4.new_markdown_cell(r"""### Detector comparison on AP_01
+
+![GMM and duration-aware detector comparison on AP_01](../figures/02_ap_01_detector_comparison.png)
+
+### Detector comparison on AP_02
+
+![GMM and duration-aware detector comparison on AP_02](../figures/03_ap_02_detector_comparison.png)"""))
 
 cells.append(nbf.v4.new_code_cell(r"""rows = []
 for name, frame in data.items():
@@ -199,7 +215,11 @@ for ax, case in zip(axes.ravel(), example_cases):
     ax.legend(fontsize=8)
 for ax in axes[-1]:
     ax.set_xlabel("Normalized time")
-fig.tight_layout()"""))
+fig.tight_layout()
+fig.savefig(FIGURES / "04_synthetic_examples.png", dpi=160, bbox_inches="tight")
+plt.close(fig)"""))
+
+cells.append(nbf.v4.new_markdown_cell(r"""![Representative synthetic signals with broad target events and narrow distractor peaks](../figures/04_synthetic_examples.png)"""))
 
 cells.append(nbf.v4.new_markdown_cell(r"""## 4. Monte Carlo comparison
 
@@ -257,8 +277,12 @@ for method, color in (("GMM", "tab:purple"), ("Duration-aware", "tab:green")):
 axes[1].set(xlabel="Absolute timing error", ylabel="Fraction of cases", title="Empirical error distribution")
 axes[1].legend()
 fig.tight_layout()
+fig.savefig(FIGURES / "05_benchmark_results.png", dpi=160, bbox_inches="tight")
+plt.close(fig)
 
 benchmark.groupby(["method", "available sensors"])["absolute error"].agg(["mean", "median", "count"]).round(4)"""))
+
+cells.append(nbf.v4.new_markdown_cell(r"""![Missing-sensor error distributions and empirical timing-error CDF](../figures/05_benchmark_results.png)"""))
 
 cells.append(nbf.v4.new_markdown_cell(r"""## 5. Conclusion
 
